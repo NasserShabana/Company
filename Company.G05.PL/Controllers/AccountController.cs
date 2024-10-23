@@ -37,7 +37,7 @@ namespace Company.G05.PL.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    var user = await userManger.FindByNameAsync(model.UeserName);
+                    var user = await userManger.FindByNameAsync(model.UserName);
                     if (user is null)
                     {
                         user = await userManger.FindByEmailAsync(model.Email);
@@ -45,7 +45,7 @@ namespace Company.G05.PL.Controllers
                         {
                             user = new ApplicationUser()
                             {
-                                UserName = model.UeserName,
+                                UserName = model.UserName,
                                 FirstName = model.FirstName,
                                 LastName = model.LastName,
                                 Email = model.Email,

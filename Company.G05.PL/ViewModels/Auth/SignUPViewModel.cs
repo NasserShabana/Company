@@ -6,7 +6,7 @@ namespace Company.G05.PL.ViewModels.Auth
 	public class SignUPViewModel
 	{
         [Required(ErrorMessage ="UserName IS Required")]
-        public string UeserName { get; set; }
+        public string UserName { get; set; }
 
 
 		[Required(ErrorMessage = "FirstName IS Required")]

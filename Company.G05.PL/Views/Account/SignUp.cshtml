@@ -1,33 +1,252 @@
 ﻿@model SignUPViewModel
 @{
-	ViewData["Title"] = "SignUp";
-	Layout = "~/Views/Shared/_AuthLayout.cshtml";
+    ViewData["Title"] = "SignUp";
+
+    Layout = "~/Views/Shared/_AuthLayout.cshtml";
 }
 
-<h1>Creative SignUp Form</h1>
+<style>
+    /* Custom styles for input fields */
+    .text,
+    .login-button {
+        width: 100%; /* Full width for both inputs and button */
+        padding: 10px; /* Padding for comfort */
+        margin: 10px 0; /* Spacing between fields */
+        border: 1px solid none; /* Border styling */
+        border-radius: 5px; /* Rounded corners */
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        box-sizing: border-box; /* Include padding and border in element's total width and height */
+    }
+
+        .text:focus {
+            border-color: white; /* Change border color on focus */
+            outline: none; /* Remove default outline */
+        }
+
+    .w3lpass {
+        position: relative; /* Position for password visibility toggle */
+    }
+
+    .toggle-password {
+        position: absolute;
+        right: 37px; /* Adjust as necessary */
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+        color: white; /* Icon color */
+        font-size: 18px; /* Icon size */
+    }
+
+    .alert {
+        color: red; /* Error message color */
+        margin: 10px 0; /* Space above and below */
+    }
+
+    h1 {
+        font-size: 3.5em; /* Font size */
+        color: white; /* Dark color for contrast */
+        text-align: center; /* Center align the text */
+        margin-bottom: 20px; /* Space below the heading */
+        font-family: 'Arial', sans-serif; /* Font family */
+        letter-spacing: 2px; /* Spacing between letters */
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    }
+
+    /* Button styling */
+    .login-button {
+        background-color: #007BFF; /* Default background color */
+        color: white; /* Text color */
+        font-size: 1.5em; /* Font size */
+        font-weight: bold; /* Make text bold */
+        cursor: pointer; /* Change cursor on hover */
+        transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+    }
+
+        .login-button:hover {
+            background-color: #0056b3; /* Darker background on hover */
+        }
+
+    .fade-in {
+        opacity: 0; /* Start invisible */
+        transition: opacity 1s ease-in-out; /* Transition for fade effect */
+    }
+
+        .fade-in.visible {
+            opacity: 1; /* Fully visible */
+        }
+
+    /* Styles for password criteria message */
+    #message {
+        display: none; /* Hidden by default */
+        margin: 10px 0; /* Space above and below */
+        padding: 20px; /* Padding inside the message box */
+        background-color: beige; /* Light background */
+        border-radius: 5px; /* Rounded corners */
+
+      }
+
+        #message p {
+            font-family: Arial;
+            margin: 5px 0; /* Space between messages */
+            color: black;
+         }
+
+    #message b{
+        font-weight:bold;
+    }
+
+    /* Checkmark and cross before the text */
+    .valid:before {
+        content: "✔ "; /* Checkmark */
+        position: relative;
+        left: -35px;
+        color:lime;
+    }
+
+    .invalid:before {
+        content: "✖ "; /* Cross */
+        position: relative;
+        left: -35px;
+        color:red;
+    }
+</style>
+
+<h1 class="fade-in">Sign up</h1>
 
 <div class="main-agileinfo">
-<div asp-validation-summary="All" class="alert alert-danger"></div>
-	<div class="agileits-top">
+    @if (ViewData.ModelState.IsValid == false)
 
-		<form asp-action="SignUp">
+    {
+        <div asp-validation-summary="All" class="alert alert-danger"></div>
+    }
+    <div class="agileits-top">
+        <form asp-action="SignUp" id="signup-form">
+            <input class="text" asp-for="UserName" placeholder="UserName" required="">
+            <input class="text" asp-for="FirstName" placeholder="First Name" required="">
+            <input class="text" asp-for="LastName" placeholder="Last Name" required="">
+            <input class="text" asp-for="Email" placeholder="Email" required="">
 
-			<input class="text" asp-for="UeserName" placeholder="UeserName" required="">
-			<input class="text" asp-for="FirstName" placeholder="FirstNam " required="">
-			<input class="text" asp-for="LastName"  placeholder="LastName " required="">
-			<input class="text" asp-for="Email"     placeholder="Email" required="">
-			<input class="text w3lpass" asp-for="Password" placeholder="Password" required="">
-			<input class="text w3lpass" asp-for="ConfirmPassword" placeholder="Confirm Password" required="">
+            <div class="w3lpass">
+                <input type="password" asp-for="Password" placeholder="Password" required="" class="text" id="password">
+                <span class="toggle-password" onclick="togglePasswordVisibility('password')">
+                    <i class="fas fa-eye" id="password-icon"></i>
+                </span>
+            </div>
+            <div class="w3lpass">
+                <input type="password" asp-for="ConfirmPassword" placeholder="Confirm Password" required="" class="text" id="confirm-password">
+                <span class="toggle-password" onclick="togglePasswordVisibility('confirm-password')">
+                    <i class="fas fa-eye" id="confirm-password-icon"></i>
+                </span>
+            </div>
 
-			<div class="wthree-text">
-				<label class="anim">
-					<input asp-for="IsAgree" class="checkbox" required="">
-					<span>I Agree To The Terms & Conditions</span>
-				</label>
-				<div class="clear"> </div>
-			</div>
-			<input type="submit" value="SIGNUP">
-		</form>
-		<p>Don't have an Account? <a asp-action="SignIn"> Login Now!</a></p>
-	</div>
+            <div id="message">
+                <h6>Password must contain the following:</h6>
+                <center>
+                    <p id="letter" class="invalid">A <b>LowerCase</b> Letter</p>
+                    <p id="capital" class="invalid">A <b>UpperCase</b> Letter </p>
+                    <p id="number" class="invalid">A <b>Number</b></p>
+                    <p id="length" class="invalid"> Minimum <b>8 Characters</b></p>
+                </center>
+         
+            </div>
+
+            <div class="wthree-text">
+                <label class="anim">
+                    <input asp-for="IsAgree" class="checkbox" required="" style="width: auto; margin-right: 10px;">
+                    <span>I Agree To The Terms & Conditions</span>
+                </label>
+                <div class="clear"> </div>
+            </div><br />
+            <input type="submit" value="Sign up" class="login-button">
+        </form>
+        <p>Don't have an Account? <a asp-action="SignIn"> Login Now!</a></p>
+    </div>
 </div>
+
+<script>
+    // Prevent scrolling when form is displayed
+    document.body.style.overflow = 'hidden';
+
+    function togglePasswordVisibility(inputId) {
+        const passwordInput = document.getElementById(inputId);
+        const toggleIcon = document.querySelector(`#${inputId}-icon`);
+
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+            toggleIcon.classList.remove('fa-eye');
+            toggleIcon.classList.add('fa-eye-slash'); // Change icon when visible
+        } else {
+            passwordInput.type = "password";
+            toggleIcon.classList.remove('fa-eye-slash');
+            toggleIcon.classList.add('fa-eye'); // Change back to original icon
+        }
+    }
+
+    // Wait for the DOM to fully load before applying the visible class
+    document.addEventListener("DOMContentLoaded", function () {
+        const heading = document.querySelector('.fade-in');
+        heading.classList.add('visible'); // Add the class to trigger the transition
+    });
+
+    // Password validation
+    const passwordInput = document.getElementById("password");
+    const letter = document.getElementById("letter");
+    const capital = document.getElementById("capital");
+    const number = document.getElementById("number");
+    const length = document.getElementById("length");
+    const symbol = document.getElementById("symbol");
+
+    // When the user clicks on the password field, show the message box
+    passwordInput.onfocus = function () {
+        document.getElementById("message").style.display = "block";
+    }
+
+    // When the user clicks outside of the password field, hide the message box
+    passwordInput.onblur = function () {
+        document.getElementById("message").style.display = "none";
+    }
+
+    // When the user starts to type something inside the password field
+    passwordInput.onkeyup = function () {
+        // Validate lowercase letters
+        const lowerCaseLetters = /[a-z]/g;
+        if (passwordInput.value.match(lowerCaseLetters)) {
+            letter.classList.remove("invalid");
+            letter.classList.add("valid");
+        } else {
+            letter.classList.remove("valid");
+            letter.classList.add("invalid");
+        }
+
+        // Validate capital letters
+        const upperCaseLetters = /[A-Z]/g;
+        if (passwordInput.value.match(upperCaseLetters)) {
+            capital.classList.remove("invalid");
+            capital.classList.add("valid");
+        } else {
+            capital.classList.remove("valid");
+            capital.classList.add("invalid");
+        }
+
+        // Validate numbers
+        const numbers = /[0-9]/g;
+        if (passwordInput.value.match(numbers)) {
+            number.classList.remove("invalid");
+            number.classList.add("valid");
+        } else {
+            number.classList.remove("valid");
+            number.classList.add("invalid");
+        }
+
+        // Validate length
+        if (passwordInput.value.length >= 8) {
+            length.classList.remove("invalid");
+            length.classList.add("valid");
+        } else {
+            length.classList.remove("valid");
+            length.classList.add("invalid");
+        }
+
+
+    }
+</script>
