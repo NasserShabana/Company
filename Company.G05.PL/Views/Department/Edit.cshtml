@@ -2,10 +2,16 @@
 @{
     ViewData["Title"] = "Edit";
 }
+<br />
+<br />
 
-<h1>Edit</h1>
+<h1 style="text-align:center;">Edit Of Department </h1>
+@if(ViewData.ModelState.IsValid == false)
+{
+    <div asp-validation-summary="All" class=" alert alert-danger"></div>
+}
+<br />
 
-<div asp-validation-summary="All" class=" alert alert-danger"></div>
 <form asp-action="Edit">
 
     <div class=" form-group">
@@ -26,8 +32,9 @@
         <input asp-for="DateOfCreation" class=" form-control" />
     </div>
     <br />
+    <br />
 
-    <input type="submit" value="Edit" class=" btn btn-warning" />
-    <a asp-action="Index" class="btn btn-light"> Back To List</a>
+    <input type="submit" value="Edit" class=" btn btn-warning"   />
+    <a asp-action="Index" class="btn btn-light" style="margin-left: 10px;"> Back To List</a>
 
 </form>

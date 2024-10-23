@@ -2,9 +2,12 @@
 @{
     ViewData["Title"] = "Delete";
 }
-
-<h1>Delete</h1>
-
+<br />
+<br />
+     <h1 style="text-align:center;">Delete Of Department </h1>
+ 
+<br />
+<br />
 <form asp-action="Delete">
     <div class="form-group">
         <label asp-for="Code" class="col-form-label"></label>
@@ -23,7 +26,9 @@
         <input asp-for="DateOfCreation " class=" form-control" readonly />
 
     </div>
+    <br />
+    <br />
     <input type="submit" class=" btn btn-danger" />
-    <a asp-action="Index" class="btn btn-light"> Back To List</a>
+    <a asp-action="Index" class="btn btn-light" style="margin-left: 10px;"> Back To List</a>
 
 </form>

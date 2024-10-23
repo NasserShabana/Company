@@ -3,8 +3,10 @@
 @{
     ViewData["Title"] = "Create";
 }
-<h1>Create Page </h1>
-<br/>
+<br />
+<br />
+<h1 style="text-align:center;">Create Of Department </h1>
+<br />
 <br/>
 
 <form asp-action="Create">
@@ -27,9 +29,10 @@
         <input asp-for ="DateOfCreation" class=" form-control" />
     </div>
 <br />
+ <br />
 
-<input type="submit" value="Create" class=" btn btn-dark"  />
-<a asp-action="Index" class="btn btn-light"> Back To List</a>
+<input type="submit" value="Create" class=" btn btn-primary"  />
+    <a asp-action="Index" class="btn btn-light" style="margin-left: 10px;"> Back To List</a>
 
 </form>
 

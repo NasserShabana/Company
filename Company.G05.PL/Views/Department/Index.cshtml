@@ -4,45 +4,108 @@
     ViewData["Title"] = "Index";
 }
 
+<style>
+    body {
+        background-color: #f0f8f4; /* Light background color */
+        color: #333; /* Default text color */
+    }
+
+    h1 {
+        text-align: center; /* Center the title */
+        margin-bottom: 30px; /* Space below the title */
+    }
+
+    .card {
+        margin: 15px; /* Margin around cards */
+        border-radius: 12px; /* Rounded corners */
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Shadow for depth */
+        background-color: #ffffff; /* Card background color */
+        transition: transform 0.2s; /* Smooth scale transition */
+    }
+
+        .card:hover {
+            transform: translateY(-5px); /* Lift effect on hover */
+        }
+
+    .card-header {
+        background-color: #76b852; /* Header background color */
+        color: white; /* Header text color */
+        font-weight: bold; /* Bold header text */
+        border-top-left-radius: 12px; /* Rounded corners */
+        border-top-right-radius: 12px; /* Rounded corners */
+        padding: 15px; /* Padding for header */
+    }
+
+    .btn {
+        margin: 5px; /* Small margin for buttons */
+        transition: background-color 0.3s; /* Smooth button transition */
+    }
+
+    .btn-success:hover {
+        background-color: #5cb85c; /* Darker green on hover */
+    }
+
+    .btn-warning:hover {
+        background-color: #e0a800; /* Darker yellow on hover */
+    }
+
+    .btn-danger:hover {
+        background-color: #c82333; /* Darker red on hover */
+    }
+
+    .alert {
+        margin: 20px auto; /* Center alert */
+        width: 90%; /* Alert width */
+    }
+
+    .card-body {
+        padding: 20px; /* Padding inside the card */
+    }
+
+    .card-title {
+        margin-bottom: 10px; /* Space below title */
+        font-size: 1.2em; /* Title font size */
+    }
+
+    .card-text {
+        margin-bottom: 15px; /* Space below text */
+        font-size: 0.9em; /* Text font size */
+    }
+</style>
+
 <h1>All Departments</h1>
-<br/>
-<br/>
 
-<a asp-controller="Department" asp-action="Create"  class="btn btn-primary">Create Department</a>
-<br />
-<br/>
-@if (Model.Count() > 0)
+ 
+@if (Model.Any())
+
 {
-    <table class="table table-striped table-hover">
-       <thead>
-            <tr>
-                <th>@Html.DisplayNameFor(D => D.Code)</th>
-                <th>@Html.DisplayNameFor(D => D.Name)</th>
-                <th>@Html.DisplayNameFor(D => D.DateOfCreation)</th>
-                <th>Details</th>
-                <th>Update</th>
-                <th>Delete</th>
-            </tr>
+    <div class="d-flex flex-wrap justify-content-center">
+        @foreach (var department in Model)
 
-       </thead>
-
-       <tbody>
-            @foreach (var department in Model) {
-                <tr>
-                    <td>@department.Code</td>
-                    <td>@department.Name</td>
-                    <td>@department.DateOfCreation</td>
-                    <partial name="ButtonPartialView" model="  department.Id .ToString()" />
-
-                </tr>
-            }
-
-       </tbody>
-    </table>
-}
-else
-{
-    <div>
-        <h4>Tere are no departments</h4>
+        {
+            <div class="card" style="width: 300px;">
+                <div class="card-header">
+                    Department Name: @department.Name
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Code: @department.Code</h5>
+                    <p class="card-text"><strong>Date of Creation:</strong> @department.DateOfCreation.ToString("d")</p>
+                    <div>
+                        <a asp-controller="Department" asp-action="Details" asp-route-id="@department.Id" class="btn btn-success btn-sm">View</a>
+                        <a asp-controller="Department" asp-action="Edit" asp-route-id="@department.Id" class="btn btn-warning btn-sm">Edit</a>
+                        <a asp-controller="Department" asp-action="Delete" asp-route-id="@department.Id" class="btn btn-danger btn-sm">Delete</a>
+                    </div>
+                </div>
+            </div>
+        }
     </div>
 }
+
+else
+
+{
+    <div class="alert alert-dark">
+        <h4>There are no departments</h4>
+    </div>
+}
+<a asp-controller="Department" asp-action="Create" class="btn btn-primary mb-3">Create Department</a>
