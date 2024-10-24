@@ -1,73 +1,118 @@
 ﻿@model IEnumerable<RoleViewModel>
+
 @{
     ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>A l l     R O L E S</h1>
-<br />
-<br />
+<style>
+    body {
+        overflow-Y: auto;
+     }
 
-<dive>
-    <a asp-action="Create" class="btn btn-primary">Add Roles</a>
-</dive>
-<br />
-<br />
+    h1 {
+        text-align: center;
+        margin-bottom: 30px;
+        color: white; /* Darker color for better visibility */
+    }
 
-<form asp-action="Index">
-    <div class="row m-5">
-        <div class=" col-8">
-            <input type="text" name="searchInput" class="form-control" />
+    .card {
+        margin: 5px; /* Increased margin around cards */
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Softer shadow */
+        background-color: white;
+        transition: transform 0.3s; /* Smooth hover effect */
+      }
 
-        </div>
-        <div class=" col-4">
-            <input type="submit" class=" btn btn-success" />
+    .card-header {
+        background-color: #76b852; /* Header background color */
+        color: white;
+        font-weight: bold;
+        padding: 10px;
+        border-bottom: 2px solid black; /* Dark border for contrast */
+    }
 
-        </div>
-    </div>
-</form>
+    .card:hover {
+        transform: translateY(-5px); /* Lift effect on hover */
+    }
+
+    .search-container {
+        margin: 20px auto;
+        display: flex;
+        justify-content: center;
+    }
+
+    .search-container input[type="text"] {
+        width: 80%;
+        margin-right: 10px;
+    }
+
+    .btn-large {
+        padding: 6px 12px;
+        font-size: 18px;
+    }
+
+    .alert {
+        margin: 20px auto;
+        width: 90%;
+    }
 
 
+</style>
 
-<br />
+<h1>All Roles</h1>
 
-@if (Model.Count() > 0)
+<div class="search-container">
+    <input type="text" id="searchInput" class="form-control" placeholder="Search by role name..." onkeyup="filterRoles()" />
+</div>
+
+@if (Model.Any())
+
 {
-    <table class="table table-striped table-hover">
-        <thead>
-            <tr>
-                <th> @Html.DisplayNameFor(E => E.Id)</th>>
-                <th> @Html.DisplayNameFor(E => E.RoleName)</th>
+    <div id="roleCards" class="d-flex flex-wrap justify-content-center">
+        @foreach (var role in Model)
 
-                <th>Details</th>
-                <th>Update</th>
-                <th>Delete</th>
-
-            </tr>
-        </thead>
-
-        <tbody>
-            @foreach (var user in Model)
-            {
-                <tr>
-                   
-
-                    <td>@user.Id</td>
-                    <td>@user.RoleName</td>
-                    <partial name="ButtonPartialView" model="user.Id" />
-                </tr>
-            }
-        </tbody>
-
-
-
-    </table>
+        {
+            <div class="card role-card" style="width: 300px;">
+                <div class="card-header">
+                    Role Name: @role.RoleName
+                </div>
+                <div class="card-body" style="color:black;">
+                    <strong>Role ID:</strong> @role.Id<br /><br/>
+                    <div style="text-align:center;">
+                        <partial name="ButtonPartialView" model="role.Id.ToString()" />
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
 }
+
 else
+
 {
-
-    <div class="alert alert-dark">
-
-        <h4>There are No Roles Yet :( </h4>
+    <div class="alert alert-danger">
+        <h4>There are No Roles :( </h4>
     </div>
 }
+
+<div >
+    <a asp-action="Create" class="btn btn-primary btn-large">Add Role</a>
+</div>
+
+<script>
+    function filterRoles() {
+        const input = document.getElementById('searchInput');
+        const filter = input.value.toLowerCase();
+        const cards = document.getElementsByClassName('role-card');
+
+        Array.from(cards).forEach(card => {
+            const roleName = card.querySelector('.card-header').textContent.toLowerCase();
+
+            if (roleName.includes(filter)) {
+                card.style.display = '';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    }
+</script>

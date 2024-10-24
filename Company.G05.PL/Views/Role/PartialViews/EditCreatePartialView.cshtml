@@ -2,8 +2,12 @@
 @* @{
     var departments = new SelectList(ViewData["department"] as IEnumerable<Department>, "Id", "Name");
 } *@
+@if(ViewData.ModelState.IsValid == false)
+{
 <div asp-validation-summary="All" class="alert alert-danger"></div>
-<div class="form-group" >
+    
+}
+<div class="form-group" style="font-weight:bold;" >
     <label asp-for="RoleName" class="col-form-label"> </label>
     <input asp-for="RoleName" class=" form-control" />
     <span asp-validation-for="RoleName" class="text-danger "></span>

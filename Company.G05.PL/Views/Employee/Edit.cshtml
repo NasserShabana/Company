@@ -3,15 +3,14 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
+<h1 style="text-align:center;">Edit Of Employee</h1>
 
-<br />
 
 <form asp-action="Edit" enctype="multipart/form-data">
     <partial name="PartialViews/EditCreatePartialView" model="Model" />
     <input hidden asp-for="ImageName" />
     <input type="submit" value="Save" class=" btn btn-primary" />
-    <a asp-action="Index" class=" btn btn-light">Back To List</a>
+    <a asp-action="Index" class=" btn btn-light" style="margin-left: 10px;">Back To List</a>
 </form>
 @section CSV {
     <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>

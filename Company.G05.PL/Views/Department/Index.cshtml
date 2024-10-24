@@ -6,17 +6,17 @@
 
 <style>
     body {
-        background-color: #f0f8f4; /* Light background color */
-        color: #333; /* Default text color */
+         color: #333; /* Default text color */
     }
 
     h1 {
         text-align: center; /* Center the title */
         margin-bottom: 30px; /* Space below the title */
+        color: white;
     }
 
     .card {
-        margin: 15px; /* Margin around cards */
+        margin: 5px; /* Margin around cards */
         border-radius: 12px; /* Rounded corners */
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Shadow for depth */
         background-color: #ffffff; /* Card background color */
@@ -34,6 +34,7 @@
         border-top-left-radius: 12px; /* Rounded corners */
         border-top-right-radius: 12px; /* Rounded corners */
         padding: 15px; /* Padding for header */
+        border-bottom: 2px solid black; /* Darker green border for contrast */
     }
 
     .btn {
@@ -71,6 +72,12 @@
         margin-bottom: 15px; /* Space below text */
         font-size: 0.9em; /* Text font size */
     }
+
+    .btn-large {
+        padding: 6px 6px; /* Increase padding */
+        font-size: 18px; /* Increase font size */
+        border-radius: 4px; /* Optional: for rounded corners */
+    }
 </style>
 
 <h1>All Departments</h1>
@@ -91,10 +98,8 @@
                     <h5 class="card-title">Code: @department.Code</h5>
                     <p class="card-text"><strong>Date of Creation:</strong> @department.DateOfCreation.ToString("d")</p>
                     <div>
-                        <a asp-controller="Department" asp-action="Details" asp-route-id="@department.Id" class="btn btn-success btn-sm">View</a>
-                        <a asp-controller="Department" asp-action="Edit" asp-route-id="@department.Id" class="btn btn-warning btn-sm">Edit</a>
-                        <a asp-controller="Department" asp-action="Delete" asp-route-id="@department.Id" class="btn btn-danger btn-sm">Delete</a>
-                    </div>
+                    <partial name="ButtonPartialView" model="department.Id.ToString()" />
+                </div>
                 </div>
             </div>
         }
@@ -108,4 +113,4 @@ else
         <h4>There are no departments</h4>
     </div>
 }
-<a asp-controller="Department" asp-action="Create" class="btn btn-primary mb-3">Create Department</a>
+<a asp-controller="Department" asp-action="Create" class="btn btn-primary btn-large">Add Department</a>

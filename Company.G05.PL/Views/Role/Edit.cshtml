@@ -3,22 +3,50 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
+<h1 class="text-center text-white">Edit of Roles</h1>
 
 <br />
 
-<form asp-action="Edit" enctype="multipart/form-data">
+<form asp-action="Edit" enctype="multipart/form-data" class="p-4 bg-light rounded shadow">
     <partial name="PartialViews/EditCreatePartialView" model="Model" />
-@*     <input hidden asp-for="ImageName" />
- *@ 
- <input type="submit" value="Save" class=" btn btn-primary" />
-    <a asp-action="Index" class=" btn btn-light">Back To List</a>
+
+    <input type="submit" value="Save" class="btn btn-primary" />
+    <a asp-action="Index" class="btn btn-light ml-2">Back To List</a>
 </form>
-<div>
-    <a asp-action="AddOrRemoveUser" asp-route-roleId="@Model.Id" class=" btn btn-danger"> Add Or Remove Users</a>
+
+<br />
+
+<div class="text-center">
+    <a asp-action="AddOrRemoveUser" asp-route-roleId="@Model.Id" class="btn btn-danger" style="margin-left:5px; padding:10px 15px;">Add Or Remove Users</a>
 </div>
 
 @section CSV {
     <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
     <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
 }
+
+<style>
+    
+
+    h1 {
+        margin-bottom: 20px; /* Space below the title */
+     }
+
+    form {
+        max-width: 600px; /* Set a max width for the form */
+        margin: auto; /* Center the form */
+        color:black;
+    }
+
+    .btn {
+        transition: background-color 0.3s, transform 0.2s; /* Smooth transitions for buttons */
+    }
+
+        .btn:hover {
+            transform: scale(1.05); /* Slightly scale up on hover */
+        }
+
+    .btn-light {
+        color: #343a40; /* Dark text on light background */
+    }
+</style>

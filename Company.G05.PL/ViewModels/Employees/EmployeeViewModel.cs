@@ -22,6 +22,7 @@ namespace Company.G05.PL.ViewModels.Employees
         public bool IsActive { get; set; }
         public DateTime HiringDate { get; set; }
         public int? WorkForId { get; set; } //FK
+        [Display(Name = "DepartmentName")]
         public Department? WorkFor { get; set; } //Navigational Property - Optional
         public IFormFile? Image {  get; set; }
         public string? ImageName { get; set; }

@@ -9,8 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 
 namespace Company.G05.PL.Controllers
 {
-	[Authorize (Roles= "Admin")]
-	public class UserController : Controller
+ 	public class UserController : Controller
 	{
 		private readonly UserManager<ApplicationUser> _userManager;
 		private readonly IMapper _mapper;

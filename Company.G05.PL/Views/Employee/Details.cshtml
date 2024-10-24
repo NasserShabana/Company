@@ -3,7 +3,7 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Employee Details</h1>
+<h1 style="text-align:center;"> Details Of Employee </h1>
 
 <br />
 
@@ -13,6 +13,6 @@
     <partial name="PartialViews/DeleteDetailsEmployeePartialView" model="Model" />
 
     <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning"> Edit</a>
-    <a asp-action="Index" class=" btn btn-light">Back To List</a>
+    <a asp-action="Index" class=" btn btn-light" style="margin-left: 10px;">Back To List</a>
 </div>
 

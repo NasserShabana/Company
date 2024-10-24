@@ -1,24 +1,69 @@
 ﻿@model List<UsersInRoleViewModel>
 @{
-    ViewData["Title"] = "AddOrRemoveUser";
+    ViewData["Title"] = "Add Or Remove User";
+
     Layout = "~/Views/Shared/_Layout.cshtml";
+
     var RoleID = ViewData["roleID"];
 }
 
-<h1>Add Or Remove User</h1>
+<h1 class="text-center text-white">Add Or Remove User</h1>
 
+<form asp-action="AddOrRemoveUser" asp-route-roleId="@RoleID" class="p-4 bg-light rounded shadow">
+    <div class="d-flex flex-wrap justify-content-center">
+        @for (int i = 0; i < Model.Count(); i++)
 
-<form asp-action="AddOrRemoveUser" asp-route-roleId="@RoleID">
-    @for (int i = 0; i < Model.Count(); i++)
-    {
-        <div class="form-group">
-            <input asp-for="@Model[i].IsSelected" />
-            <label asp-for="@Model[i].IsSelected"> @Model[i].UserName</label>
-        </div>
-        <input type ="hidden" asp-for="@Model[i].UserId" />
-        <input type ="hidden" asp-for="@Model[i].UserName" />
+        {
+            <div class="card m-2" style="width: 250px;">
+                <div class="card-body">
+                    <div class="form-check">
+                        <input type="checkbox" asp-for="@Model[i].IsSelected" id="user_@Model[i].UserId" class="form-check-input" />
+                        <label asp-for="@Model[i].IsSelected" class="form-check-label" for="user_@Model[i].UserId"> @Model[i].UserName</label>
+                    </div>
+                    <input type="hidden" asp-for="@Model[i].UserId" />
+                    <input type="hidden" asp-for="@Model[i].UserName" />
+                </div>
+            </div>
+        }
+    </div>
+
+    <div class="text-center">
+        <input type="submit" value="Update" class="btn btn-warning mt-3" />
+        <a asp-action="Edit" asp-route-Id="@RoleID" class="btn btn-primary mt-3 ml-2" style="margin-left: 20px;">Cancel</a>
+    </div>
+</form>
+
+<style>
+    body {
+        color: white; /* Text color */
+     }
+
+    h1 {
+        margin-bottom: 30px; /* Space below the title */
     }
 
-    <input type="submit" value="Update" class=" btn btn-success " />
- <a asp-action="Edit" asp-route-Id="@RoleID" class="btn btn-dark">Cancel</a>
-</form>
+    form {
+        max-width: 800px; /* Limit the width of the form */
+        margin: auto; /* Center the form */
+    }
+
+    .card {
+        background-color: #76b852; /* Card background color */
+        color: black; /* Text color inside cards */
+        border-radius: 10px; /* Rounded corners */
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15); /* Shadow for depth */
+        font-weight:bold;
+    }
+
+    .form-check {
+        margin: 0; /* Remove default margin from form check */
+    }
+
+    .btn {
+        transition: background-color 0.3s, transform 0.2s; /* Smooth transitions for buttons */
+    }
+
+        .btn:hover {
+            transform: scale(1.05); /* Slightly scale up on hover */
+        }
+</style>

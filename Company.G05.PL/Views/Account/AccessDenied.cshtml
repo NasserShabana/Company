@@ -1,40 +1,62 @@
-﻿
-@{
+﻿@{
     Layout = "";
 }
 
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Access Denied</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Access Denied</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-
     <style>
         body {
             background-color: black;
             color: white;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
         }
 
-        h1,h3 {
+        .container {
+            text-align: center;
+            border: 2px solid red; /* Border for emphasis */
+            border-radius: 10px; /* Rounded corners */
+            padding: 20px; /* Spacing around the content */
+            background-color: rgba(255, 0, 0, 0.1); /* Slightly transparent background */
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); /* Depth effect */
+        }
+
+        h1, h3, h6 {
             color: red;
         }
 
         h6 {
-            color: black;
             text-decoration: underline;
+        }
+
+        hr {
+            margin: auto;
+            width: 50%;
+            border: 1px solid white; /* Solid white border for visibility */
+        }
+
+        .emoji {
+            font-size: 2em; /* Increase emoji size */
         }
     </style>
 </head>
 <body>
-    <div class="w3-display-middle">
-        <h1 class="w3-jumbo w3-animate-top w3-center"><code>Access Denied</code></h1>
-        <hr class="w3-border-white w3-animate-left" style="margin:auto;width:50%">
-        <h3 class="w3-center w3-animate-right">You dont have permission to view this site.</h3>
-        <h3 class="w3-center w3-animate-zoom">🚫🚫🚫🚫</h3>
-        <h6 class="w3-center w3-animate-zoom">error code:403 forbidden</h6>
+    <div class="container">
+        <h1 class="w3-jumbo w3-animate-top"><code>Access Denied</code></h1>
+        <hr class="w3-border-white w3-animate-left">
+        <h3 class="w3-animate-right">You don't have permission to view this site.</h3>
+        <h3 class="emoji w3-animate-zoom">🚫🚫🚫🚫</h3>
+        <h6 class="w3-animate-zoom">Error Code: 401 Forbidden</h6>
     </div>
 </body>
 </html>
-

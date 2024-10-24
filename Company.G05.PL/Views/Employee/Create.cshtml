@@ -3,14 +3,15 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Add Employee</h1>
+<h1 style="text-align:center;">Add Employee</h1>
+ 
 
-<form asp-action="Create"  enctype="multipart/form-data">
+<form asp-action="Create" enctype="multipart/form-data">
 
     <partial name="PartialViews/EditCreatePartialView" model="Model" />
 
     <input type ="submit" value="Create" class=" btn btn-primary"/>
-    <a asp-action="Index" class=" btn btn-light">Back To List</a>
+    <a asp-action="Index" class=" btn btn-light" style="margin-left: 10px;">Back To List</a>
 </form>
 
  @section CSV {

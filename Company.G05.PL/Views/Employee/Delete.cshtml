@@ -3,7 +3,7 @@
     ViewData["Title"] = "Delete";
 }
 
-<h1>Delete</h1>
+<h1 style="text-align:center;">Delete Of Employee</h1>
 
 <br />
 <form asp-action="Delete" enctype="multipart/form-data">
@@ -12,6 +12,6 @@
     <input hidden asp-for="ImageName" />
 
     <input type="submit" value="Delete" class=" btn btn-danger" />
-    <a asp-action="Index" class=" btn btn-light">Back To List</a>
+    <a asp-action="Index" class=" btn btn-light" style="margin-left: 10px;">Back To List</a>
 
 </form>
