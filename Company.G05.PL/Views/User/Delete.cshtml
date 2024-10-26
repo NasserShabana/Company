@@ -3,15 +3,71 @@
     ViewData["Title"] = "Delete";
 }
 
-<h1>Delete</h1>
+<style>
+    body {
+        color: white; /* Text color */
+     }
 
-<br />
-<form asp-action="Delete" enctype="multipart/form-data">
+    h1 {
+        text-align: center; /* Center the title */
+        margin-bottom: 30px; /* Space below the title */
+        font-size: 2rem; /* Larger title size */
+    }
 
-    <partial name="PartialViews/DeleteDetailsUserPartialView" model="Model" />
-    @* <input hidden asp-for="ImageName" /> *@
+    .card {
+        margin: 10px auto; /* Center card with margin */
+        border-radius: 10px; /* Rounded corners */
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Shadow for depth */
+        background-color: white; /* Card background color */
+        color: black; /* Text color inside the card */
+        transition: transform 0.2s; /* Smooth scale transition */
+        width: 90%; /* Flexible width */
+        max-width: 500px; /* Maximum width for larger screens */
+    }
 
-    <input type="submit" value="Delete" class=" btn btn-danger" />
-    <a asp-action="Index" class=" btn btn-light">Back To List</a>
+        .card:hover {
+            transform: scale(1.02); /* Slight zoom effect on hover */
+        }
 
+    .card-header {
+        background-color: #76b852; /* Header background color */
+        color: white; /* Header text color */
+        font-weight: bold; /* Bold header text */
+        padding: 15px; /* Padding for header */
+        border-top-left-radius: 10px; /* Rounded corners */
+        border-top-right-radius: 10px; /* Rounded corners */
+        text-align: center; /* Centered text */
+        font-size: 1.5rem; /* Larger font size for header */
+    }
+
+    .card-body {
+        padding: 15px; /* Padding for body */
+        font-size: 1.1rem; /* Slightly larger font size */
+    }
+
+    .btn {
+        margin: 10px; /* Margin for buttons */
+        padding: 10px 20px; /* Padding for buttons */
+        font-size: 1.1rem; /* Larger font size for buttons */
+    }
+</style>
+
+<h1>Delete User</h1>
+
+<div class="card">
+    <div class="card-header">
+        @Model.FirstName @Model.LastName
+    </div>
+    <div class="card-body">
+        <p><strong>Email:</strong> @Model.Email</p>
+        <p><strong>Roles:</strong> @(Model.Roles.Any() ? String.Join(", ", Model.Roles) : "No Role")</p>
+     </div>
+</div>
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="Id" />
+    <div class="text-center">
+        <input type="submit" value="Delete" class="btn btn-danger" />
+        <a asp-action="Index" class="btn btn-light">Back To List</a>
+    </div>
 </form>

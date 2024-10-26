@@ -1,71 +1,116 @@
 ﻿@model IEnumerable<UserViewModel>
 @{
     ViewData["Title"] = "Index";
+
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>A l l  U s e r s</h1>
+<h1 class="text-center text-white">All Users</h1>
 <br />
 
-<form asp-action="Index">
-    <div class="row m-5">
-        <div class=" col-8">
-            <input type="text" name="searchInput" class="form-control" />
 
-        </div>
-        <div class=" col-4">
-            <input type="submit" class=" btn btn-success" />
+<div class="search-container">
+    <input type="text" id="searchInput" class="form-control" placeholder="Search by name, email..." onkeyup="filterUsers()" />
+</div>
 
-        </div>
-    </div>
-</form>
+<div class="d-flex flex-wrap justify-content-center">
+    @if (Model.Any())
 
-
-
-<br />
-
-@if (Model.Count() > 0)
-{
-    <table class="table table-striped table-hover">
-        <thead>
-            <tr>
-                <th> @Html.DisplayNameFor(E => E.Id)</th>>
-                <th> @Html.DisplayNameFor(E => E.FirstName)</th>
-                <th> @Html.DisplayNameFor(E => E.LastName)</th>
-                <th> @Html.DisplayNameFor(E => E.Email)</th>
-                <th> @Html.DisplayNameFor(E => E.Roles)</th>
-                <th>Details</th>
-                <th>Update</th>
-                <th>Delete</th>
-
-            </tr>
-        </thead>
-
-        <tbody>
-            @foreach (var user in Model)
-            {
-                <tr>
-                   
-
-                    <td>@user.Id</td>
-                    <td>@user.FirstName</td>
-                    <td>@user.LastName</td>
-                    <td>@user.Email</td>
-                    <td>@String.Join(" ", user.Roles)</td>
+    {
+        @foreach (var user in Model)
+        {
+            <div class="card user-card m-2">
+                <div class="card-header text-center" style="background-color: #76b852; color: white;">
+                    @user.FirstName @user.LastName
+                </div>
+                <div class="card-body text-center">
+                    <p class="card-text">Email: @user.Email</p>
+                    <p class="card-text">Roles: @(user.Roles.Any() ? String.Join(", ", user.Roles) : "No Role")</p>
                     <partial name="ButtonPartialView" model="@user.Id" />
-                </tr>
+                </div>
+            </div>
+        }
+    }
+
+    else
+
+    {
+        <div class="alert alert-dark text-center w-100">
+            <h4>There are No Users Yet :( </h4>
+        </div>
+    }
+</div>
+
+<style>
+    body {
+        color: white; /* Text color */
+        overflow-y: auto; /* Allow vertical scrolling if needed */
+    }
+
+    h1 {
+        margin-bottom: 30px; /* Space below the title */
+    }
+
+    .card {
+        background-color: #ffffff; /* White background for cards */
+        color: black; /* Text color inside cards */
+        border-radius: 10px; /* Rounded corners */
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Shadow for depth */
+        transition: transform 0.2s; /* Transition for hover effect */
+        max-width: 400px; /* Set max width for cards */
+    }
+
+    .card-header {
+        border-top-left-radius: 10px; /* Rounded corners */
+        border-top-right-radius: 10px; /* Rounded corners */
+        padding: 10px; /* Padding for header */
+        font-weight: bold; /* Bold header text */
+    }
+
+    .card:hover {
+        transform: translateY(-5px); /* Lift effect on hover */
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3); /* Deeper shadow on hover */
+    }
+
+    .search-container {
+        margin: 20px auto;
+        display: flex;
+        justify-content: center;
+    }
+
+        .search-container input[type="text"] {
+            width: 80%;
+            margin-right: 10px;
+        }
+
+    .btn {
+        transition: background-color 0.3s, transform 0.2s; /* Smooth transitions for buttons */
+    }
+
+        .btn:hover {
+            transform: scale(1.05); /* Slightly scale up on hover */
+        }
+
+    .alert {
+        margin: 20px 0; /* Space around alert */
+    }
+</style>
+
+<script>
+    function filterUsers() {
+        const input = document.getElementById('searchInput');
+        const filter = input.value.toLowerCase();
+        const cards = document.getElementsByClassName('user-card');
+
+        Array.from(cards).forEach(card => {
+            const name = card.querySelector('.card-header').textContent.toLowerCase();
+            const email = card.querySelector('.card-body').innerHTML.toLowerCase();
+
+            if (name.includes(filter) || email.includes(filter)) {
+                card.style.display = '';
+            } else {
+                card.style.display = 'none';
             }
-        </tbody>
-
-
-
-    </table>
-}
-else
-{
-
-    <div class="alert alert-dark">
-
-        <h4>There are No Users Yet :( </h4>
-    </div>
-}
+        });
+    }
+</script>

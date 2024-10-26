@@ -3,17 +3,63 @@
     ViewData["Title"] = "Details";
 }
 
+<style>
+    body {
+        color: white; /* Text color */
+     }
+
+    h1 {
+        text-align: center; /* Center the title */
+        margin-bottom: 30px; /* Space below the title */
+        font-size: 2rem; /* Larger title size */
+    }
+
+    .card {
+        margin: 20px auto; /* Center card with margin */
+        border-radius: 10px; /* Rounded corners */
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Shadow for depth */
+        background-color: white; /* Card background color */
+        color: black; /* Text color inside the card */
+        width: 90%; /* Flexible width */
+        max-width: 500px; /* Maximum width for larger screens */
+    }
+
+    .card-header {
+        background-color: #76b852; /* Header background color */
+        color: white; /* Header text color */
+        font-weight: bold; /* Bold header text */
+        padding: 10px; /* Padding for header */
+        text-align: center; /* Centered text */
+        font-size: 1.5rem; /* Larger font size for header */
+    }
+
+    .card-body {
+        padding: 20px; /* Padding for card body */
+        text-align: left; /* Align text to the left */
+    }
+
+    .btn {
+        margin: 10px; /* Margin for buttons */
+        padding: 10px 20px; /* Padding for buttons */
+        font-size: 1.1rem; /* Larger font size for buttons */
+    }
+
+    .text-center {
+        text-align: center; /* Center text */
+    }
+</style>
+<br />
 <h1>User Details</h1>
 
-<br />
-
-
-<div>
-
-    <partial name="PartialViews/DeleteDetailsUserPartialView" model="Model" />
-
-    <a  asp-controller="User" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning"> Edit</a>
-    <a asp-action="Index" class=" btn btn-light">Back To List</a>
-
+<div class="card">
+    <div class="card-header">
+        Details for @Model.FirstName @Model.LastName
+    </div>
+    <div class="card-body">
+        <partial name="PartialViews/DeleteDetailsUserPartialView" model="Model" /><br />
+        <div class="text-center">
+            <a asp-controller="User" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Edit</a>
+            <a asp-action="Index" class="btn btn-light">Back To List</a>
+        </div>
+    </div>
 </div>
-

@@ -3,17 +3,60 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
+<style>
+    body {
+        color: white; /* Text color */
+     }
 
+    h1 {
+        text-align: center; /* Center the title */
+        margin-bottom: 30px; /* Space below the title */
+        font-size: 2rem; /* Larger title size */
+    }
+
+    .card {
+        margin: 10px auto; /* Center card with margin */
+        border-radius: 10px; /* Rounded corners */
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Shadow for depth */
+        background-color: white; /* Card background color */
+        color: black; /* Text color inside the card */
+        width: 90%; /* Flexible width */
+        max-width: 500px; /* Maximum width for larger screens */
+    }
+
+    .card-header {
+        background-color: #76b852; /* Header background color */
+        color: white; /* Header text color */
+        font-weight: bold; /* Bold header text */
+        padding: 10px; /* Padding for header */
+        text-align: center; /* Centered text */
+        font-size: 1.5rem; /* Larger font size for header */
+    }
+
+    .btn {
+        margin: 10px; /* Margin for buttons */
+        padding: 10px 20px; /* Padding for buttons */
+        font-size: 1.1rem; /* Larger font size for buttons */
+    }
+</style>
 <br />
+<h1>Edit User</h1>
 
-<form asp-action="Edit" enctype="multipart/form-data">
-    <partial name="PartialViews/EditCreatePartialView" model="Model" />
-@*     <input hidden asp-for="ImageName" />
- *@ 
- <input type="submit" value="Save" class=" btn btn-primary" />
-    <a asp-action="Index" class=" btn btn-light">Back To List</a>
-</form>
+<div class="card">
+    <div class="card-header">
+        @Model.FirstName@Model.LastName Information
+    </div>
+    <div class="card-body">
+        <form asp-action="Edit" enctype="multipart/form-data">
+            <partial name="PartialViews/EditCreatePartialView" model="Model" /><br />
+            <div class="text-center">
+                <input type="submit" value="Save" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-light">Back To List</a>
+            </div>
+        </form>
+    </div>
+</div>
+
 @section CSV {
     <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
     <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>

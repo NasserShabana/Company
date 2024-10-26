@@ -3,16 +3,45 @@
     ViewData["Title"] = "Delete";
 }
 
-<h1 style="text-align:center;">Delete Of Role</h1>
+<h1 class="text-center text-white">Delete Of Role</h1>
 
 <br />
-<form asp-action="Delete" enctype="multipart/form-data">
 
-    <partial name="PartialViews/DeleteDetailsRolePartialView" model="Model" />
-    @* <input hidden asp-for="ImageName" /> *@
-    <br />
+<div class="card mx-auto" style="max-width: 600px;">
+    <div class="card-header text-center" style="background-color:#76b852; color: white;">
+        Confirm Deletion
+    </div>
+    <div class="card-body">
+        <form asp-action="Delete" enctype="multipart/form-data">
+            <partial name="PartialViews/DeleteDetailsRolePartialView" model="Model" />
+            <br />
+            <div class="text-center">
+                <input type="submit" value="Delete" class="btn btn-danger" />
+                <a asp-action="Index" class="btn btn-light ml-2">Back To List</a>
+            </div>
+        </form>
+    </div>
+</div>
 
-    <input type="submit" value="Delete" class=" btn btn-danger" />
-    <a asp-action="Index" class=" btn btn-light" style="margin-left: 10px;">Back To List</a>
+<style>
+    h1 {
+        margin-bottom: 20px; /* Space below the title */
+    }
 
-</form>
+    .card {
+        border-radius: 10px; /* Rounded corners */
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Shadow for depth */
+    }
+
+    .btn {
+        transition: background-color 0.3s, transform 0.2s; /* Smooth transitions for buttons */
+    }
+
+        .btn:hover {
+            transform: scale(1.05); /* Slightly scale up on hover */
+        }
+
+    .btn-light {
+        color: #343a40; /* Dark text on light background */
+    }
+</style>

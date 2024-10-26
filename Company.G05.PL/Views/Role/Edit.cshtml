@@ -7,12 +7,21 @@
 
 <br />
 
-<form asp-action="Edit" enctype="multipart/form-data" class="p-4 bg-light rounded shadow">
-    <partial name="PartialViews/EditCreatePartialView" model="Model" />
-
-    <input type="submit" value="Save" class="btn btn-primary" />
-    <a asp-action="Index" class="btn btn-light ml-2">Back To List</a>
-</form>
+<div class="card mx-auto" style="max-width: 600px;">
+    <div class="card-header text-center" style="background-color: #76b852; color: white;">
+        
+        <strong> @Model.RoleName </strong>
+    </div>
+    <div class="card-body">
+        <form asp-action="Edit" enctype="multipart/form-data">
+            <partial name="PartialViews/EditCreatePartialView" model="Model" />
+            <div class="text-center">
+                <input type="submit" value="Save" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-light ml-2">Back To List</a>
+            </div>
+        </form>
+    </div>
+</div>
 
 <br />
 
@@ -26,16 +35,13 @@
 }
 
 <style>
-    
-
     h1 {
         margin-bottom: 20px; /* Space below the title */
-     }
+    }
 
-    form {
-        max-width: 600px; /* Set a max width for the form */
-        margin: auto; /* Center the form */
-        color:black;
+    .card {
+        border-radius: 10px; /* Rounded corners */
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Shadow for depth */
     }
 
     .btn {
