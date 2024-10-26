@@ -7,6 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="ViewModels\Departments\**" />
+    <Content Remove="ViewModels\Departments\**" />
+    <EmbeddedResource Remove="ViewModels\Departments\**" />
+    <None Remove="ViewModels\Departments\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="13.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.8">
       <PrivateAssets>all</PrivateAssets>
@@ -20,7 +27,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ViewModels\Departments\" />
     <Folder Include="wwwroot\Files\Images\" />
     <Folder Include="wwwroot\Files\Videos\" />
   </ItemGroup>
